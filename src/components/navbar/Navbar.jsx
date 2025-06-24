@@ -1,20 +1,28 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
-import { FiShoppingCart  } from "react-icons/fi"
+import { FiShoppingCart } from "react-icons/fi";
 
-
-motion
+motion;
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <Header>
+    <Header
+      as={motion.header}
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       <Nav>
         <Logo>
-            <img src="/Imagen de WhatsApp 2025-06-21 a las 11.35.21_682dc4cf.webp" alt="" />
-            🌿 Saludable</Logo>       
-        
+          <img
+            src="/logo22.jpg"
+            alt=""
+          />
+          🌿 Saludable
+        </Logo>
+
         <NavLinks>
           <li>
             <a href="#promos">Promociones</a>
@@ -26,22 +34,41 @@ const Navbar = () => {
             <a href="#contacto">Contacto</a>
           </li>
         </NavLinks>
-         <FiShoppingCart />
-         <MenuToggle onClick={() => setMenuOpen(!menuOpen)}>☰</MenuToggle>
+
+        <RightWrapper>
+          <CartIcon
+            whileHover={{ scale: 1.2 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <FiShoppingCart />
+          </CartIcon>
+        </RightWrapper>
+        <MenuToggle onClick={() => setMenuOpen(!menuOpen)}>☰</MenuToggle>
       </Nav>
       <AnimatePresence>
         {menuOpen && (
-            <MobileMenu
+          <MobileMenu
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
           >
-            <li><a href="#promos" onClick={() => setMenuOpen(false)}>Promociones</a></li>
-            <li><a href="#productos" onClick={() => setMenuOpen(false)}>Productos</a></li>
-            <li><a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a></li>
+            <li>
+              <a href="#promos" onClick={() => setMenuOpen(false)}>
+                Promociones
+              </a>
+            </li>
+            <li>
+              <a href="#productos" onClick={() => setMenuOpen(false)}>
+                Productos
+              </a>
+            </li>
+            <li>
+              <a href="#contacto" onClick={() => setMenuOpen(false)}>
+                Contacto
+              </a>
+            </li>
           </MobileMenu>
-
         )}
       </AnimatePresence>
     </Header>
@@ -75,21 +102,25 @@ const Logo = styled.div`
     width: auto;
     object-fit: contain;
     margin: 0.5rem;
+    border-radius: 5rem;    
   }
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: #397c43;
+
 `;
 
 const MenuToggle = styled.button`
   font-size: 1.6rem;
   background: none;
   border: none;
-  color: #fff;
+  color: #397c43;
+  padding: 0;
   display: none;
 
   @media (max-width: 768px) {
     display: block;
+    padding-right: 1.5rem;
   }
 `;
 
@@ -99,9 +130,10 @@ const NavLinks = styled.ul`
   list-style: none;
 
   li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
+    color: #397c43;
+  text-decoration: none;
+  font-weight: 500;
+
   }
 
   @media (max-width: 768px) {
@@ -111,14 +143,14 @@ const NavLinks = styled.ul`
 
 const MobileMenu = styled(motion.ul)`
   position: fixed;
-  top: 60px;
+  top: 65px;
   right: 0;
-  background: #e8fbe5;
+  background: linear-gradient(135deg, #b6e1a7, #5cb477);
   width: 70%;
   height: 100vh;
   padding: 2rem;
   list-style: none;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
 
   li {
     margin-bottom: 1.5rem;
@@ -129,5 +161,29 @@ const MobileMenu = styled(motion.ul)`
     color: #397c43;
     font-size: 1.2rem;
     font-weight: bold;
+  }
+`;
+
+const RightWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  @media (min-width: 769px) {
+    padding-right: 2rem;
+    gap: 1.5rem;
+  }
+`;
+
+const CartIcon = styled(motion.div)`
+  color: #397c43;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  @media (max-width: 769px) {
+    padding-left: 1.5rem;
   }
 `;
