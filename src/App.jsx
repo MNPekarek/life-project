@@ -5,17 +5,24 @@ import { ContextProvider } from './components/context/Context'
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import PropagandaCarousel from './components/carrusel/carrusel'
 import Navbar from './components/navbar/Navbar'
+import Cart from './components/cart/Cart'
+import Home from './pages/Home'
+import ItemDetail from './components/itemDetails/ItemDetails'
 
 function App() {
  
 
   return (
     <ContextProvider>
-      <Navbar />
-      <PropagandaCarousel />
       <BrowserRouter>
+      <Navbar />
+      {/* <PropagandaCarousel /> */}
       <Routes>
-        <Route path='/' element={<ItemListContainer />} />     
+        <Route path='/' element={<Home />} /> 
+        <Route path='/categoria/:categoria' element={<ItemListContainer />} />
+        <Route path='/detalle/:id' element={<ItemDetail />} />
+        <Route path='/carrito' element={<Cart />} />    
+        <Route path='*' element={<p>404 Not Found</p>} />
            
         </Routes>      
 

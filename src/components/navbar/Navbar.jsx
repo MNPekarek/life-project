@@ -2,10 +2,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
+import CartWidget from "../cart/CartWidget";
+import { useNavigate } from "react-router-dom";
 
 motion;
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <Header
@@ -15,7 +18,7 @@ const Navbar = () => {
       transition={{ duration: 0.4 }}
     >
       <Nav>
-        <Logo>
+        <Logo onClick={() => navigate("/")}>
           <img
             src="/logo22.jpg"
             alt=""
@@ -40,7 +43,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.2 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <FiShoppingCart />
+            <CartWidget />
           </CartIcon>
         </RightWrapper>
         <MenuToggle onClick={() => setMenuOpen(!menuOpen)}>☰</MenuToggle>
