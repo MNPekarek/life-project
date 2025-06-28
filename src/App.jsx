@@ -8,6 +8,7 @@ import Navbar from './components/navbar/Navbar'
 import Cart from './components/cart/Cart'
 import Home from './pages/Home'
 import ItemDetail from './components/itemDetails/ItemDetails'
+import SearchPage from './pages/SearchPage'
 
 function App() {
  
@@ -21,7 +22,8 @@ function App() {
         <Route path='/' element={<Home />} /> 
         <Route path='/categoria/:categoria' element={<ItemListContainer />} />
         <Route path='/detalle/:id' element={<ItemDetail />} />
-        <Route path='/carrito' element={<Cart />} />    
+        <Route path='/carrito' element={<Cart />} />   
+        <Route path='/search' element={<SearchPage />} /> 
         <Route path='*' element={<p>404 Not Found</p>} />
            
         </Routes>      

@@ -29,10 +29,13 @@ const SlideImage = styled.img`
 const PropagandaCarousel = () => {
 
     const imagenes = [
-    "/Imagen de WhatsApp 2025-06-21 a las 11.31.53_99a99078.jpg",
-    "/Imagen de WhatsApp 2025-06-21 a las 11.32.16_757771a0.jpg",
-    "/Imagen de WhatsApp 2025-06-21 a las 11.32.39_1fe97f34.jpg",
-    "/Imagen de WhatsApp 2025-06-21 a las 11.33.17_f05593b4.jpg"
+    "/1.jpg",
+    "/2.jpg",
+    "/3.jpg",
+    "/4.jpg",
+    "/5.jpg",
+    "/6.jpg",
+    "/7.jpg"
 ];
 
 
