@@ -1,5 +1,6 @@
 import PropagandaCarousel from "../components/carrusel/carrusel";
 import ItemListContainer from "../components/ItemListContainer/ItemListContainer";
+import NewProducts from "../components/newProduct/NewProducts";
 import SearchBar from "../components/search/Search";
 
 
@@ -11,6 +12,7 @@ function Home()  {
         <>
         <PropagandaCarousel />
         <SearchBar  />
+        <NewProducts />
         <ItemListContainer />        
         </>
     )

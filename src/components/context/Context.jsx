@@ -12,6 +12,8 @@ export const ContextProvider = ({children}) => {
     const [carrito, setCarrito] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
 
+    const clearCart = () => setCarrito([]);
+
     useEffect(() => {
         const productosCollection = collection(db, "productos");
 
@@ -48,7 +50,7 @@ export const ContextProvider = ({children}) => {
     }
 
     return (
-        <AppContext.Provider value={{ productos, carrito, setCarrito, agregarAlCarrito, searchQuery,setSearchQuery }}>
+        <AppContext.Provider value={{ productos, carrito, setCarrito, agregarAlCarrito, searchQuery,setSearchQuery, clearCart }}>
             {children}
         </AppContext.Provider> 
     )

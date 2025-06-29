@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useAppContext } from "../context/Context";
 import { Link } from "react-router-dom";
 
+
 const CartContainer = styled.div`
 padding: 2rem;
 max-width: 900px;
@@ -110,7 +111,7 @@ function Cart() {
       <TotalBox>
         <h3>Total: ${totalFinal}</h3>
         {carrito.length > 0 && (
-          <FinalButton to="/ordenes">Finalizar Compra</FinalButton>
+          <FinalButton to="/ordenes">Finalizar Compra</FinalButton>          
         )}
       </TotalBox>
     </CartContainer>
