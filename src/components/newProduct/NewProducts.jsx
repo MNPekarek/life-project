@@ -11,6 +11,28 @@ background: #fff;
 const Title = styled.h2`
 font-size: 1.8rem;
 margin-bottom: 1rem;
+color: #3a5a40;
+letter-spacing: 0.05rem;
+font-weight: 600;
+position: relative;
+display: inline-block;
+
+&::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background-color: #3a5a40;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+&:hover::after {
+    transform: scaleX(1);
+} 
 `;
 const ScrollContainer = styled.div`
 display: flex;
@@ -46,10 +68,6 @@ export default function NewProducts() {
             <ScrollContainer>
                 {nuevos.map((el) => (
                     <Item key={el.id} producto={el} />
-                //     <ProductCard key={idx}>
-                //     <h4>{prod.nombre} </h4>
-                //     <p>${prod.precio} </p>
-                // </ProductCard>
                 )
             )}
             </ScrollContainer>
