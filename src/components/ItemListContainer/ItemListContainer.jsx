@@ -15,7 +15,7 @@ function ItemListContainer() {
   const [loading, setLoading] = useState(true);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [paginaActual, setPAginaActual] = useState(1);
-  const productosPorPagina = 6;
+  const productosPorPagina = 10;
 
   useEffect(() => {
     if (productos.length > 0) {
