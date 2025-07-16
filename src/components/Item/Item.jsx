@@ -89,7 +89,7 @@ const PopMsg = styled.span`
 
 
 function Item({ producto }) {
-  const { id, nombre, img, precio } = producto;
+  const { id, nombre, img, precio, cantidad } = producto;
   const { agregarAlCarrito } = useAppContext();
   const [ confimacion, setConfirmacion] = useState(false);
 
@@ -105,6 +105,7 @@ function Item({ producto }) {
         <CardHeader>{nombre}</CardHeader>
         <CardImage src={img} alt={nombre} />
         <Price>Precio: ${precio}</Price>
+        <p> {cantidad} </p>
         {/* <Stock>Quedan {stock} disponibles</Stock> */}
       </CardLink>
       <AddButton onClick={handleAgregar}>
