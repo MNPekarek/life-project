@@ -28,13 +28,19 @@ const Navbar = () => {
 
         <NavLinks>
           <li>
-            <a href="#promos">Promociones</a>
+            <a onClick={() => navigate("/categoria/Frutos Secos")}>Frutos Secos</a>
           </li>
           <li>
-            <a href="#productos">Productos</a>
+            <a onClick={() => navigate("/categoria/Snacks salados")}>Snacks salados</a>
           </li>
           <li>
-            <a href="#contacto">Contacto</a>
+            <a onClick={() => navigate("/categoria/Snacks dulces")}>Snacks dulces</a>
+          </li>
+          <li>
+            <a onClick={() => navigate("/categoria/Condimentos")}>Condimentos</a>
+          </li>
+          <li>
+            <a onClick={() => navigate("/categoria/Cereales")}>Cereales</a>
           </li>
         </NavLinks>
 
@@ -57,18 +63,28 @@ const Navbar = () => {
             transition={{ type: "tween", duration: 0.3 }}
           >
             <li>
-              <a href="#promos" onClick={() => setMenuOpen(false)}>
-                Promociones
+              <a onClick={() => {setMenuOpen(false); navigate("/categoria/Frutos Secos")}}>
+                Frutos Secos
               </a>
             </li>
             <li>
-              <a href="#productos" onClick={() => setMenuOpen(false)}>
-                Productos
+              <a onClick={() => {setMenuOpen(false); navigate("/categoria/Snacks salados")}}>
+                Snacks salados
               </a>
             </li>
             <li>
-              <a href="#contacto" onClick={() => setMenuOpen(false)}>
-                Contacto
+              <a onClick={() =>{ setMenuOpen(false); navigate("/categoria/Snacks dulces")}}>
+                Snacks dulces
+              </a>
+            </li>
+            <li>
+              <a onClick={() =>{ setMenuOpen(false); navigate("/categoria/Condimentos")}}>
+                Condimentos
+              </a>
+            </li>
+            <li>
+              <a onClick={() =>{ setMenuOpen(false); navigate("/categoria/Cereales")}}>
+                Cereales
               </a>
             </li>
           </MobileMenu>
