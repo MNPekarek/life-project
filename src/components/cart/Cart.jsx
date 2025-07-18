@@ -83,7 +83,7 @@ function Cart() {
   };
 
   const totalFinal = carrito.reduce(
-    (acc, el) => acc + el.precio * el.cantidad,
+    (acc, el) => acc + el.precio * el.cantidadCart,
     0
   );
 
@@ -99,8 +99,8 @@ function Cart() {
             <ProductDetails>
               <h3>{producto.nombre}</h3>
               <Text>Precio: ${producto.precio}</Text>
-              <Text>Cantidad: {producto.cantidad}</Text>
-              <Text>Total: ${producto.precio * producto.cantidad}</Text>
+              <Text>Cantidad: {producto.cantidadCart}</Text>
+              <Text>Total: ${producto.precio * producto.cantidadCart}</Text>
               <DeleteButton onClick={() => eliminarProducto(producto.id)}>
                 ❌
               </DeleteButton>

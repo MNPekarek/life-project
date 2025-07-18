@@ -28,17 +28,17 @@ export const ContextProvider = ({children}) => {
         .catch(err => console.error("Error al obtener los productos:", err))
     }, [])
 
-    function agregarAlCarrito(prod, cantidad) {
-        if (!cantidad || isNaN(cantidad)) {
-            cantidad = 1;
+    function agregarAlCarrito(prod, cantidadCart) {
+        if (!cantidadCart || isNaN(cantidadCart)) {
+            cantidadCart = 1;
         } 
 
-        const nuevoProducto = { ...prod, cantidad };
+        const nuevoProducto = { ...prod, cantidadCart };
 
         console.log("Producto antes de agregar al carrito:", nuevoProducto);
 
         if (carrito.some(el => el.id === prod.id)) {
-            const newCarrito = carrito.map(element => element.id === prod.id ? { ...element, cantidad: element.cantidad + cantidad} : element );
+            const newCarrito = carrito.map(element => element.id === prod.id ? { ...element, cantidadCart: element.cantidadCart + cantidadCart} : element );
             setCarrito(newCarrito);
         } else {
             setCarrito([...carrito, nuevoProducto]);

@@ -58,12 +58,12 @@ function CartDropdown() {
             ) : (
                 carrito.map((producto) => (
                     <Product key={producto.id}>
-                        <p>{producto.nombre} - {producto.cantidad} ${producto.precio * producto.cantidad}</p>
+                        <p>{producto.nombre} {producto.cantidad} - {producto.cantidadCart} ${producto.precio * producto.cantidadCart}</p>
                     </Product>
                 ))
             )}
             <Total>
-                Total: ${carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)}
+                Total: ${carrito.reduce((acc, el) => acc + el.precio * el.cantidadCart, 0)}
             </Total>
             <Button onClick={() => navigate("/carrito")}>Ver carrito</Button>
         </Dropdown>

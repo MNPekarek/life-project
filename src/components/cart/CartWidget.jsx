@@ -18,7 +18,7 @@ function CartWidget() {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const totalItems = carrito.reduce((acc, el) => acc + el.cantidad, 0);
+  const totalItems = carrito.reduce((acc, el) => acc + el.cantidadCart, 0);
 
   return (
     <div style={{ display: "flex" }}>

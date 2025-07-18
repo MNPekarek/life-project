@@ -40,9 +40,10 @@ function FormDatesClient() {
   const { carrito, clearCart } = useAppContext();
   const [name, setName] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
+  const [addressClient, setAddressClient] = useState("");
 
   const phoneNumber = "5493513419548";
-  const message = generateWhatsAppMessage(carrito, name, neighborhood);
+  const message = generateWhatsAppMessage(carrito, name, addressClient, neighborhood);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
@@ -53,6 +54,12 @@ function FormDatesClient() {
         placeholder="Tu nombre"
         value={name}
         onChange={(e) => setName(e.target.value)}
+      />
+      <Input
+        type="text"
+        placeholder="Tu dirección"
+        value={addressClient}
+        onChange={(e) => setAddressClient(e.target.value)}
       />
       <Input
         type="text"
