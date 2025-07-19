@@ -7,6 +7,8 @@ position: absolute;
 right: 1rem;
 top: 4.5rem;
 width: 300px;
+max-height: 60vh;
+overflow-y: auto;
 background-color: #f9f9f9;
 border: 1px solid #ddd;
 border-radius: 12px;
@@ -20,6 +22,14 @@ color: #333;
     transform: translateX(50%);
     width: 90vw;
 } */
+
+ &::-webkit-scrollbar {
+    width: 6px;
+ }
+ &::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 6px;
+ }
 `;
 const Product = styled.div`
 padding: 0.5rem;

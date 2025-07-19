@@ -46,7 +46,7 @@ const Navbar = () => {
 
         <RightWrapper>
           <CartIcon
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: 1.1 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <CartWidget />
