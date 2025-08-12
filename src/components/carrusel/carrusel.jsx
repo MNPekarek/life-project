@@ -11,6 +11,12 @@ const CarouselWrapper = styled.div`
   margin: 2rem auto;
   padding: 0 1rem;
   box-sizing: border-box;
+
+  @media (min-width: 1024px) {
+    width: 70%;
+    margin: 1rem auto;
+  }
+
 `;
 
 const SlideContainer = styled.div`
@@ -29,13 +35,18 @@ const SlideImage = styled.img`
 const PropagandaCarousel = () => {
 
     const imagenes = [
-    "/1.jpg",
-    "/2.jpg",
-    "/3.jpg",
-    "/4.jpg",
-    "/5.jpg",
-    "/6.jpg",
-    "/7.jpg"
+      "/public/Imagen de WhatsApp 2025-08-11 a las 23.34.02_6f9d257c.webp",
+      "/public/Imagen de WhatsApp 2025-08-11 a las 23.34.02_a627f855.webp",
+      "/public/Imagen de WhatsApp 2025-08-11 a las 23.34.03_7bb813da.jpg",
+      "/public/Imagen de WhatsApp 2025-08-11 a las 23.34.03_b7e13664.jpg",
+      "/public/Imagen de WhatsApp 2025-08-11 a las 23.36.09_b2ea4839.jpg"
+    // "/1.jpg",
+    // "/2.jpg",
+    // "/3.jpg",
+    // "/4.jpg",
+    // "/5.jpg",
+    // "/6.jpg",
+    // "/7.jpg"
 ];
 
 
