@@ -19,28 +19,88 @@ const Navbar = () => {
     >
       <Nav>
         <Logo onClick={() => navigate("/")}>
-          <img
-            src="/logo22.jpg"
-            alt=""
-          />
+          <img src="/logo22.jpg" alt="" />
           🌿 Saludable
         </Logo>
 
         <NavLinks>
           <li>
-            <a onClick={() => navigate("/categoria/Frutos Secos")}>Frutos Secos</a>
+            <a onClick={() => navigate("/categoria/aceites y vinagres")}>
+              Aceites y vinagres
+            </a>
           </li>
           <li>
-            <a onClick={() => navigate("/categoria/Snacks salados")}>Snacks salados</a>
+            <a>Snacks</a>
+            <ul>
+              <li>
+                <a onClick={() => navigate("/categoria/Snacks salados")}>
+                  Snacks salados
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/categoria/Snacks dulces")}>
+                  Snacks dulces
+                </a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a onClick={() => navigate("/categoria/Snacks dulces")}>Snacks dulces</a>
+            <a>Frutas y frutos</a>
+            <ul>
+              <li>
+                <a onClick={() => navigate("/categoria/Frutos Secos")}>
+                  Frutos Secos
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/categoria/Frutas deshidatadas")}>
+                  Frutas deshidatadas
+                </a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a onClick={() => navigate("/categoria/Condimentos")}>Condimentos</a>
+            <a>Desayuno y repostería</a>
+            <ul>
+              <li>
+                <a onClick={() => navigate("/categoria/Cereales")}>Cereales</a>
+              </li>
+              <li>
+                <a
+                  onClick={() =>
+                    navigate("/categoria/Reposteria e ingredientes")
+                  }
+                >
+                  Repostería e ingredientes
+                </a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a onClick={() => navigate("/categoria/Cereales")}>Cereales</a>
+            <a>Varios</a>
+            <ul>
+              <li>
+                <a onClick={() => navigate("/categoria/Condimentos")}>
+                  Condimentos
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/categoria/legumbres")}>
+                  Legumbres
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/categoria/infusiones y cafe")}>
+                  Infusiones y café
+                </a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/categoria/semillas")}>Semillas</a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/categoria/varios")}>Varios</a>
+              </li>
+            </ul>
           </li>
         </NavLinks>
 
@@ -63,29 +123,58 @@ const Navbar = () => {
             transition={{ type: "tween", duration: 0.3 }}
           >
             <li>
-              <a onClick={() => {setMenuOpen(false); navigate("/categoria/Frutos Secos")}}>
+              <a onClick={() => navigate("/categoria/aceites y vinagres")}>
+                Aceites y vinagres
+              </a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/categoria/Frutos Secos")}>
                 Frutos Secos
               </a>
             </li>
             <li>
-              <a onClick={() => {setMenuOpen(false); navigate("/categoria/Snacks salados")}}>
+              <a onClick={() => navigate("/categoria/Frutas deshidatadas")}>
+                Frutas deshidatadas
+              </a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/categoria/Snacks salados")}>
                 Snacks salados
               </a>
             </li>
             <li>
-              <a onClick={() =>{ setMenuOpen(false); navigate("/categoria/Snacks dulces")}}>
+              <a onClick={() => navigate("/categoria/Snacks dulces")}>
                 Snacks dulces
               </a>
             </li>
             <li>
-              <a onClick={() =>{ setMenuOpen(false); navigate("/categoria/Condimentos")}}>
+              <a onClick={() => navigate("/categoria/Condimentos")}>
                 Condimentos
               </a>
             </li>
             <li>
-              <a onClick={() =>{ setMenuOpen(false); navigate("/categoria/Cereales")}}>
-                Cereales
+              <a onClick={() => navigate("/categoria/legumbres")}>Legumbres</a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/categoria/infusiones y cafe")}>
+                Infusiones y café
               </a>
+            </li>
+            <li>
+              <a
+                onClick={() => navigate("/categoria/Reposteria e ingredientes")}
+              >
+                Repostería e ingredientes
+              </a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/categoria/Cereales")}>Cereales</a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/categoria/semillas")}>Semillas</a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/categoria/varios")}>Varios</a>
             </li>
           </MobileMenu>
         )}
@@ -121,12 +210,11 @@ const Logo = styled.div`
     width: auto;
     object-fit: contain;
     margin: 0.5rem;
-    border-radius: 5rem;    
+    border-radius: 5rem;
   }
   font-size: 1.5rem;
   font-weight: bold;
   color: #397c43;
-
 `;
 
 const MenuToggle = styled.button`
@@ -148,11 +236,46 @@ const NavLinks = styled.ul`
   gap: 2rem;
   list-style: none;
 
-  li a {
-    color: #397c43;
-  text-decoration: none;
-  font-weight: 500;
+  li {
+    position: relative;
 
+    a {
+      color: #397c43;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem;
+      display: block;
+      cursor: pointer;
+    }
+
+    ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: linear-gradient(135deg, #b6e1a7, #5cb477);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      padding: 0.5rem 0;
+      z-index: 999;
+      min-width: 180px;
+
+      li {
+        a {
+          padding: 0.5rem 1rem;
+          color: #374151;
+          white-space: nowrap;
+
+          &:hover {
+            background-color: #f3f4f6;
+          }
+        }
+      }
+    }
+
+    &:hover ul {
+      display: block;
+    }
   }
 
   @media (max-width: 768px) {
