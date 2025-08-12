@@ -94,13 +94,13 @@ function Cart() {
         <Text>🌿 El carrito está vacío por ahora</Text>
       ) : (
         carrito.map((producto) => (
-          <ProductCard key={producto.id}>
-            <ProductoImage src={producto.img} alt={producto.nombre} />
+          <ProductCard key={producto._id}>
+            <ProductoImage src={producto.thumbnail} alt={producto.title} />
             <ProductDetails>
-              <h3>{producto.nombre}</h3>
-              <Text>Precio: ${producto.precio}</Text>
+              <h3>{producto.title}</h3>
+              <Text>Precio: ${producto.price}</Text>
               <Text>Cantidad: {producto.cantidadCart}</Text>
-              <Text>Total: ${producto.precio * producto.cantidadCart}</Text>
+              <Text>Total: ${producto.price * producto.cantidadCart}</Text>
               <DeleteButton onClick={() => eliminarProducto(producto.id)}>
                 ❌
               </DeleteButton>

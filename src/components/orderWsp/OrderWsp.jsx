@@ -5,8 +5,8 @@ export const generateWhatsAppMessage = (carrito, nombre, addressClient ,neighbor
   let total = 0;
 
   carrito.forEach((prod) => {
-    const prodTotal = prod.cantidadCart * prod.precio;
-    message += `- ${prod.nombre} ${prod.cantidad} x ${
+    const prodTotal = prod.cantidadCart * prod.price;
+    message += `- ${prod.title} ${prod.quantity} x ${
       prod.cantidadCart
     } - $${prodTotal.toLocaleString()}\n`;
     total += prodTotal;
