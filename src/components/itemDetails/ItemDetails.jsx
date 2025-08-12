@@ -5,6 +5,7 @@ import Loader from "../loader/Loader";
 import ItemCount from "../itemCount/ItemCount";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const DetailContaiener = styled.div`
   display: flex;
@@ -74,25 +75,41 @@ const CantidadButton = styled.button`
 `;
 
 function ItemDetail() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
   const [producto, setProducto] = useState(null);
   const [contador, setContador] = useState(1);
 
-  const { productos, agregarAlCarrito } = useAppContext();
+  const { agregarAlCarrito } = useAppContext();
+
+  const [variantes, setVariantes] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (productos.length > 0) {
-      const productosAMostrar = productos.find((el) => el.id === parseInt(id));
-      setProducto(productosAMostrar);
-      setTimeout(() => {
+    const fetchProducto = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/products/${id}`);
+        setProducto(res.data.payload);
+      } catch (err) {
+        console.log("Error al obtener el producto:", err);
+      } finally {
         setLoading(false);
-      }, 500);
+      }
+    };
+
+    fetchProducto();
+  }, [id]);
+
+  useEffect(() => {
+    if (producto?.title) {
+      axios(`${API_URL}/api/products/variants/${encodeURIComponent(producto.title)}`)
+        .then((res) => setVariantes(res.data.payload))
+        .catch((err) => console.error("Error al obtener variantes", err));
     }
-  }, [productos, id]);
+  }, [producto]);
 
   if (loading) {
     return (
@@ -106,43 +123,42 @@ function ItemDetail() {
     return <p>Producto no encontrado en el id {id} </p>;
   }
 
-  const { nombre, img, precio, categoria, descripcion, stock } = producto;
+  const { title, thumbnail, price, category, description, stock } = producto;
 
-  
-  const nameProduc = nombre;
-  const productosXNombre = productos.filter(
-    (prod) => prod.nombre === nameProduc
-  );
-
+  // const nameProduc = title;
+  // const productosXNombre = productos.filter(
+  //   (prod) => prod.nombre === nameProduc
+  // );
 
   return (
     <DetailContaiener>
       <ImageBox>
-        <ProductImg src={img} alt={nombre} />
+        <ProductImg src={thumbnail} alt={title} />
       </ImageBox>
       <InfoBox>
-        <Title>{nombre} </Title>
-        <Price>${precio} </Price>
-        <h5>Categoria: {categoria} </h5>
+        <Title>{title} </Title>
+        <Price>${price} </Price>
+        <h5>Categoria: {category} </h5>
         {/* <p>Quedan {stock} </p> */}
-        <p>{descripcion} </p>
+        <p>{description} </p>
         <CantidadBox>
           <p>Cantidad: </p>
-          {productosXNombre.map((prod) => (
+          {variantes.map((prod) => (
             <CantidadButton
-              key={prod.id}
-              onClick={() => navigate(`/detalle/${prod.id} `)}
+              key={prod._id}
+              onClick={() => navigate(`/detalle/${prod._id}`)}
               style={{
                 backgroundColor:
-                  prod.id === producto.id ? "#4caf50" : "#67a66a",
-                fontWeight: prod.id === producto.id ? "bold" : "normal",
-                border: prod.id === producto.id ? "2px solid white" : "none",
+                  prod._id === producto._id ? "#4caf50" : "#67a66a",
+                fontWeight: prod._id === producto._id ? "bold" : "normal",
+                border: prod._id === producto._id ? "2px solid white" : "none",
               }}
-            > 
-              {prod.cantidad}
+            >
+              {prod.quantity}
             </CantidadButton>
           ))}
         </CantidadBox>
+
         <ItemCount
           stock={stock}
           contador={contador}

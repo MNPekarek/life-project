@@ -1,9 +1,9 @@
 // SearchBar.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Fuse from "fuse.js"; // fuzzy search
-import { useAppContext } from "../context/Context";
-import { useNavigate } from "react-router-dom";
+// import { useAppContext } from "../context/Context";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const SearchWrapper = styled.div`
   width: 100%;
@@ -42,39 +42,38 @@ const SuggestionItem = styled.li`
   }
 `;
 
-const SearchBar = () => {
-  const {productos, setSearchQuery} = useAppContext()
-  const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+const SearchBar = () => {  
+  const [params] = useSearchParams();
+  const initialQuery = params.get("q") || "";
+  const [query, setQuery] = useState(initialQuery);
   const navigate = useNavigate();
-
+  
+  // const [suggestions, setSuggestions] = useState([]);
   // Configuración para fuzzy search
-  const fuse = new Fuse(productos, {
-    keys: ["nombre", "categoria", "descripcion"], // personalizá estas keys según tu modelo
-    threshold: 0.4, // sensibilidad
-  });
+  // const fuse = new Fuse(productos, {
+  //   keys: ["nombre", "categoria", "descripcion"], // personalizá estas keys según tu modelo
+  //   threshold: 0.4, // sensibilidad
+  // });
 
-  useEffect(() => {
-    if (query.length === 0) return setSuggestions([]);
+//   useEffect(() => {
+//     if (query.length === 0) return setSuggestions([]);
 
-    const resultados = fuse.search(query).map((res) => res.item);
-    setSuggestions(resultados.slice(0, 5)); // Mostramos hasta 5 sugerencias
-  }, [query]);
+//     const resultados = fuse.search(query).map((res) => res.item);
+//     setSuggestions(resultados.slice(0, 5)); // Mostramos hasta 5 sugerencias
+//   }, [query]);
 
-  const handleSelect = (producto) => {
-    const nombre = producto.nombre;
-    setQuery(nombre);
-    setSuggestions([]);
-    setSearchQuery(nombre); // Lógica para manejar el producto seleccionado
-    navigate(`/search?q=${encodeURIComponent(nombre)}`);
-};
+//   const handleSelect = (producto) => {
+//     const nombre = producto.nombre;
+//     setQuery(nombre);
+//     setSuggestions([]);
+//     setSearchQuery(nombre); // Lógica para manejar el producto seleccionado
+//     navigate(`/search?q=${encodeURIComponent(nombre)}`);
+// };
 
 const handleSubmit = () => {
-  const trimmedQuery = query.trim();
-  if (!trimmedQuery) return;
-  setSuggestions([]);
-  setSearchQuery(trimmedQuery);
-  navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
+  const trimmed = query.trim();
+  if (!trimmed) return;
+  navigate(`/search?q=${encodeURIComponent(trimmed)}`);
 };
 
   return (
@@ -90,7 +89,7 @@ const handleSubmit = () => {
           }
         }}
       />
-      {suggestions.length > 0 && (
+      {/* {suggestions.length > 0 && (
         <Suggestions>
           {suggestions.map((item, idx) => (
             <SuggestionItem key={idx} onClick={() => handleSelect(item)}>
@@ -98,7 +97,7 @@ const handleSubmit = () => {
             </SuggestionItem>
           ))}
         </Suggestions>
-      )}
+      )} */}
     </SearchWrapper>
   );
 };

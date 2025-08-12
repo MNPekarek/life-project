@@ -12,7 +12,7 @@ function Home()  {
         <>
         <PropagandaCarousel />
         <SearchBar  />
-        <NewProducts />
+        {/* <NewProducts /> */}
         <ItemListContainer />        
         </>
     )

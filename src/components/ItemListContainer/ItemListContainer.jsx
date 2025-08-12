@@ -1,53 +1,49 @@
 import { useParams } from "react-router-dom";
-import { useAppContext } from "../context/Context";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Loader from "../loader/Loader";
 import Item from "../Item/Item";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useMongoProducts } from "../../hooks/useMongoProducts";
 
-// motion
-
-function ItemListContainer() {
+function ItemListContainer({
+   
+  search,
+  page,
+  limit,
+  onPageChange,
+  title = "Catálogo"
+}) {
+  const [paginaActual, setPaginaActual] = useState(page || 1);
+  const pagina = page || paginaActual
+  
   const { categoria } = useParams();
-  const { productos } = useAppContext();
+  const categoriaNormalizada = categoria?.toLowerCase().trim();
 
-  const [loading, setLoading] = useState(true);
-  const [productosFiltrados, setProductosFiltrados] = useState([]);
-  const [paginaActual, setPAginaActual] = useState(1);
-  const productosPorPagina = 16;
+  const { products, loading, totalPages } = useMongoProducts({
+    category: categoriaNormalizada,
+    search,
+    page: paginaActual,
+    limit, 
+  });
+  
 
-  useEffect(() => {
-    if (productos.length > 0) {
-      const filtrados = categoria
-        ? productos.filter((el) => el.categoria === categoria)
-        : productos;
-      setProductosFiltrados(filtrados);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
+  
+  // const productosPorPagina = 16;
+  
+  const cambiarPagina = (nuevaPagina) => {
+    if (onPageChange) {
+      onPageChange(nuevaPagina);
+    } else {
+      setPaginaActual(nuevaPagina);
     }
-  }, [productos, categoria]);
-
-  const indiceInicial = (paginaActual - 1) * productosPorPagina;
-  const indiceFinal = indiceInicial + productosPorPagina;
-  const productosEnPagina = productosFiltrados.slice(
-    indiceInicial,
-    indiceFinal
-  );
-
+  }
+  
   const paginaSiguiente = () => {
-    if (
-      paginaActual < Math.ceil(productosFiltrados.length / productosPorPagina)
-    ) {
-      setPAginaActual(paginaActual + 1);
-    }
+    if (pagina < totalPages) cambiarPagina(pagina + 1);  
   };
-
   const paginaAnterior = () => {
-    if (paginaActual > 1) {
-      setPAginaActual(paginaActual - 1);
-    }
+    if (pagina > 1) cambiarPagina(pagina - 1);
   };
 
   if (loading) {
@@ -65,13 +61,13 @@ function ItemListContainer() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Catálogo
+        {title}
       </Title>
 
-      {productosEnPagina.length > 0 ? (
+      {Array.isArray(products) && products.length > 0 ? (
         <GridContainer>
-            {productosEnPagina.map((el) => (
-                <Item key={el.id} producto={el} />
+            {products.map((el) => (
+                <Item key={el._id} producto={el} />
                 ))}
         </GridContainer>
       ) : (
@@ -83,16 +79,11 @@ function ItemListContainer() {
           Anterior
         </Boton>
         <PaginaTexto>
-          Página {paginaActual} de{" "}
-          {Math.ceil(productosFiltrados.length / productosPorPagina)}
+          Página {pagina} de {totalPages}          
         </PaginaTexto>
         <Boton
           onClick={paginaSiguiente}
-          disabled={
-            paginaActual ===
-            Math.ceil(productosFiltrados.length / productosPorPagina)
-          }
-        >
+          disabled={paginaActual === totalPages }>
           Siguiente
         </Boton>
       </Paginacion>
