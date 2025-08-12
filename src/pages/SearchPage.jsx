@@ -50,7 +50,7 @@ const SearchPage = () => {
     return(
         <div>
 
-        <SearchBar  />
+        {/* <SearchBar  /> */}
         <ItemListContainer 
         search={search}
         limit={16}

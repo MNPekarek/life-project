@@ -1,22 +1,22 @@
 import { useParams } from "react-router-dom";
-import {  useState } from "react";
+import { useState } from "react";
 import Loader from "../loader/Loader";
 import Item from "../Item/Item";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useMongoProducts } from "../../hooks/useMongoProducts";
+import SearchBar from "../search/Search";
 
 function ItemListContainer({
-   
   search,
   page,
   limit,
   onPageChange,
-  title = "Catálogo"
+  title = "Catálogo",
 }) {
   const [paginaActual, setPaginaActual] = useState(page || 1);
-  const pagina = page || paginaActual
-  
+  const pagina = page || paginaActual;
+
   const { categoria } = useParams();
   const categoriaNormalizada = categoria?.toLowerCase().trim();
 
@@ -24,23 +24,21 @@ function ItemListContainer({
     category: categoriaNormalizada,
     search,
     page: paginaActual,
-    limit, 
+    limit,
   });
-  
 
-  
   // const productosPorPagina = 16;
-  
+
   const cambiarPagina = (nuevaPagina) => {
     if (onPageChange) {
       onPageChange(nuevaPagina);
     } else {
       setPaginaActual(nuevaPagina);
     }
-  }
-  
+  };
+
   const paginaSiguiente = () => {
-    if (pagina < totalPages) cambiarPagina(pagina + 1);  
+    if (pagina < totalPages) cambiarPagina(pagina + 1);
   };
   const paginaAnterior = () => {
     if (pagina > 1) cambiarPagina(pagina - 1);
@@ -55,39 +53,43 @@ function ItemListContainer({
   }
 
   return (
-    <CatalogWrapper>
-      <Title
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        {title}
-      </Title>
+    <div>
+      <SearchBar />
+      <CatalogWrapper>
+        <Title
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {title}
+        </Title>
 
-      {Array.isArray(products) && products.length > 0 ? (
-        <GridContainer>
+        {Array.isArray(products) && products.length > 0 ? (
+          <GridContainer>
             {products.map((el) => (
-                <Item key={el._id} producto={el} />
-                ))}
-        </GridContainer>
-      ) : (
-        <Message>No hay productos en esta categoría 🧺</Message>
-      )}
+              <Item key={el._id} producto={el} />
+            ))}
+          </GridContainer>
+        ) : (
+          <Message>No hay productos en esta categoría 🧺</Message>
+        )}
 
-      <Paginacion>
-        <Boton onClick={paginaAnterior} disabled={paginaActual === 1}>
-          Anterior
-        </Boton>
-        <PaginaTexto>
-          Página {pagina} de {totalPages}          
-        </PaginaTexto>
-        <Boton
-          onClick={paginaSiguiente}
-          disabled={paginaActual === totalPages }>
-          Siguiente
-        </Boton>
-      </Paginacion>
-    </CatalogWrapper>
+        <Paginacion>
+          <Boton onClick={paginaAnterior} disabled={paginaActual === 1}>
+            Anterior
+          </Boton>
+          <PaginaTexto>
+            Página {pagina} de {totalPages}
+          </PaginaTexto>
+          <Boton
+            onClick={paginaSiguiente}
+            disabled={paginaActual === totalPages}
+          >
+            Siguiente
+          </Boton>
+        </Paginacion>
+      </CatalogWrapper>
+    </div>
   );
 }
 
@@ -154,19 +156,19 @@ const Title = styled(motion.h2)`
 `;
 
 const CatalogWrapper = styled.div`
-padding: 3rem 1rem;
-background-color: #fdfdfd;
-min-height: 100vh;
+  padding: 0.5rem 1rem;
+  background-color: #fdfdfd;
+  min-height: 100vh;
 `;
 const GridContainer = styled.div`
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-gap: 1.5rem;
-justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
 `;
 const Message = styled.p`
-text-align: center;
-color: #6b7280;
-font-size: 1.1rem;
-margin-top: 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin-top: 2rem;
 `;

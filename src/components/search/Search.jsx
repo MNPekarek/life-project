@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 const SearchWrapper = styled.div`
   width: 100%;
   max-width: 500px;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   position: relative;
 `;
 
