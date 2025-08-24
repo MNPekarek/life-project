@@ -79,11 +79,11 @@ function Cart() {
   const { carrito, setCarrito } = useAppContext();
 
   const eliminarProducto = (id) => {
-    setCarrito(carrito.filter((producto) => producto.id !== id));
+    setCarrito(carrito.filter((producto) => producto._id !== id));
   };
 
   const totalFinal = carrito.reduce(
-    (acc, el) => acc + el.precio * el.cantidadCart,
+    (acc, el) => acc + el.price * el.cantidadCart,
     0
   );
 
@@ -97,11 +97,11 @@ function Cart() {
           <ProductCard key={producto._id}>
             <ProductoImage src={producto.thumbnail} alt={producto.title} />
             <ProductDetails>
-              <h3>{producto.title}</h3>
+              <h3>{producto.title} {producto.quantity}</h3>
               <Text>Precio: ${producto.price}</Text>
               <Text>Cantidad: {producto.cantidadCart}</Text>
               <Text>Total: ${producto.price * producto.cantidadCart}</Text>
-              <DeleteButton onClick={() => eliminarProducto(producto.id)}>
+              <DeleteButton onClick={() => eliminarProducto(producto._id)}>
                 ❌
               </DeleteButton>
             </ProductDetails>

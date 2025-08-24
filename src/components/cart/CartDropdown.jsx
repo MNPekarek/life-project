@@ -68,7 +68,7 @@ function CartDropdown() {
             ) : (
                 carrito.map((producto) => (
                     <Product key={producto._id}>
-                        <p>{producto.title} {producto.cantidad} - {producto.cantidadCart} ${producto.price * producto.cantidadCart}</p>
+                        <p>{producto.title} {producto.quantity} - {producto.cantidadCart} ${producto.price * producto.cantidadCart}</p>
                     </Product>
                 ))
             )}
