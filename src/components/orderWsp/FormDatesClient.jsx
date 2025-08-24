@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useAppContext } from "../context/Context";
 import { useState } from "react";
 import { generateWhatsAppMessage } from "./OrderWsp";
+import { saveOrderToDB } from "./saveOrderToDB.js";
 
 const FormContainer = styled.div`
   background: #f5f5f5;
@@ -54,11 +55,13 @@ function FormDatesClient() {
 
   const isMobile = /iPhone|Android|iPad|Mobile/i.test(navigator.userAgent);
 
-  const sendViaWhatsApp = (type) => {
+  const sendViaWhatsApp = async (type) => {
     if (!name || !addressClient || !neighborhood) {
       alert("Completá todos los campos antes de enviar.");
       return;
     }
+
+    await saveOrderToDB(carrito, name, addressClient, neighborhood);
 
     const message = generateWhatsAppMessage(
       carrito,

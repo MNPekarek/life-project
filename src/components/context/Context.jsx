@@ -35,7 +35,7 @@ export const ContextProvider = ({children}) => {
 
         const nuevoProducto = { ...prod, cantidadCart };
 
-        console.log("Producto antes de agregar al carrito:", nuevoProducto);
+        
 
         if (carrito.some(el => el._id === prod._id)) {
             const newCarrito = carrito.map(element => element._id === prod._id ? { ...element, cantidadCart: element.cantidadCart + cantidadCart} : element );
@@ -45,7 +45,7 @@ export const ContextProvider = ({children}) => {
         }
 
         setTimeout(() => {
-            console.log("Carrito actualizado:", carrito);
+            
         }, 1000)
     }
 
